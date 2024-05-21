@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shopping_list/data/categories.dart';
 
 import 'package:shopping_list/models/category.dart';
+import 'package:shopping_list/models/grocery_item.dart';
 
 class NewItem extends StatefulWidget {
   const NewItem({super.key});
@@ -13,8 +14,23 @@ class NewItem extends StatefulWidget {
 class _NewItemState extends State<NewItem> {
   final _formkey = GlobalKey<FormState>();
 
+  var _enteredName = '';
+  var _enteredQuantity = 1;
+  var _enteredCategory = categories[Categories.vegetables]!;
+
   void _saveForm() {
-    _formkey.currentState!.validate();
+    if (_formkey.currentState!.validate()) {
+      _formkey.currentState!.save();
+      Navigator.of(context).pop(GroceryItem(
+        id: DateTime.now().toString(),
+        name: _enteredName,
+        quantity: _enteredQuantity,
+        category: _enteredCategory,
+      ));
+      print(_enteredName);
+      print(_enteredQuantity);
+      print(_enteredCategory.title);
+    }
   }
 
   @override
@@ -43,13 +59,16 @@ class _NewItemState extends State<NewItem> {
                   }
                   return null;
                 },
+                onSaved: (value) {
+                  _enteredName = value!;
+                },
               ),
               Row(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Expanded(
                     child: TextFormField(
-                      initialValue: '1',
+                      initialValue: _enteredQuantity.toString(),
                       decoration: const InputDecoration(
                         labelText: 'Quantity',
                       ),
@@ -62,6 +81,9 @@ class _NewItemState extends State<NewItem> {
                           return 'The quantity must be a positive number.';
                         }
                         return null;
+                      },
+                      onSaved: (value) {
+                        _enteredQuantity = int.parse(value!);
                       },
                     ),
                   ),
@@ -86,7 +108,9 @@ class _NewItemState extends State<NewItem> {
                             ),
                           ),
                       ],
-                      onChanged: (value) {},
+                      onChanged: (value) {
+                        _enteredCategory = value!;
+                      },
                     ),
                   ),
                 ],
