@@ -73,26 +73,43 @@ class _GroceryListState extends State<GroceryList> {
     _loadItems();
   }
 
-  void _removeItem(int index) {
+  void _removeItem(int index) async {
     final item = _groceryItems[index];
     setState(() {
       _groceryItems.remove(_groceryItems[index]);
     });
-    ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: const Text('Item removed!'),
-        duration: const Duration(seconds: 4),
-        action: SnackBarAction(
-          label: 'UNDO',
-          onPressed: () {
-            setState(() {
-              _groceryItems.insert(index, item);
-            });
-          },
-        ),
-      ),
+
+    final response = await http.delete(
+      Uri.https('flutter-prep-7b859-default-rtdb.firebaseio.com',
+          'shopping_list/${item.id}.json'),
     );
+
+    if (response.statusCode >= 400) {
+      setState(() {
+        _groceryItems.insert(index, item);
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Failed to delete item!'),
+          ),
+        );
+      });
+    }
+
+    // ScaffoldMessenger.of(context).clearSnackBars();
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //   SnackBar(
+    //     content: const Text('Item removed!'),
+    //     duration: const Duration(seconds: 4),
+    //     action: SnackBarAction(
+    //       label: 'UNDO',
+    //       onPressed: () {
+    //         setState(() {
+    //           _groceryItems.insert(index, item);
+    //         });
+    //       },
+    //     ),
+    //   ),
+    // );
   }
 
   @override
