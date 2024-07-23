@@ -19,6 +19,7 @@ A mobile application designed to help you keep track of your groceries by allowi
 
 ### Technologies
 - [**Flutter**](https://flutter.dev/): A UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase.
+- [**Firebase**](https://firebase.google.com/): A set of backend cloud computing services and application development platforms provided by Google. It hosts databases, services, authentication, and integration for a variety of applications, including Android, iOS, JavaScript, Node.js, Java, Unity, PHP, and C++.
 - [**Dart**](https://dart.dev/): The programming language used by Flutter.
 - [**Visual Studio Code**](https://code.visualstudio.com/): A lightweight and powerful code editor with excellent support for various programming languages.
 
