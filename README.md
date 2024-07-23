@@ -11,9 +11,9 @@ A mobile application designed to help you keep track of your groceries by allowi
 
 ## Features
 
-- View Groceries: View all your groceries in a comprehensive list, including details such as title, amount, and category.
-- Add Groceries: Easily add new items to your shopping list by specifying their title, amount, and category.
-- Remove Groceries: Remove items from your shopping list with a simple action.
+- **View Groceries**: View all your groceries in a comprehensive list, including details such as title, amount, and category.
+- **Add Groceries**: Easily add new items to your shopping list by specifying their title, amount, and category.
+- **Remove Groceries**: Remove items from your shopping list with a simple action.
 
 ## Technologies and Packages
 
